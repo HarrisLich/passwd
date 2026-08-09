@@ -1,0 +1,35 @@
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+.dev.vars
+
+node_modules
+dist
+coverage
+.wrangler
+.svelte-kit
+.output
+.wxt
+
+# Local DBs / runtime data
+.data/
+*.db
+*.db-*
+
+# Desktop / native
+**/src-tauri/target/
+
+# Playwright / test artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Editor / OS
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json

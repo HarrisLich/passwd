@@ -1,0 +1,84 @@
+{
+	"name": "passwd-server",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"description": "Passwd API — Hono on Cloudflare Workers + Turso (ciphertext only)",
+	"scripts": {
+		"dev": "tsx scripts/dev-server.ts",
+		"dev:edge": "wrangler dev src/index.ts",
+		"deploy": "wrangler deploy",
+		"typecheck": "tsc --noEmit --pretty",
+		"test": "vitest",
+		"test:ci": "vitest run --coverage --passWithNoTests",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"db:push": "drizzle-kit push",
+		"db:migrate:sharing": "sqlite3 .data/passwd.db < scripts/migrate-sharing.sql",
+		"db:studio": "drizzle-kit studio",
+		"prepare": "husky || true"
+	},
+	"dependencies": {
+		"@libsql/client": "^0.14.0",
+		"better-auth": "^1.6.26",
+		"drizzle-orm": "^0.45.2",
+		"hono": "^4.7.4",
+		"pino": "^9.6.0",
+		"uuid": "^11.1.0",
+		"zod": "^3.24.2"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^5.20260801.1",
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@hono/node-server": "^2.1.0",
+		"@types/node": "^22.13.10",
+		"@vitest/coverage-v8": "^3.0.8",
+		"dotenv": "^17.4.2",
+		"drizzle-kit": "^0.31.10",
+		"eslint": "^9.22.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.4.3",
+		"pino-pretty": "^13.0.0",
+		"prettier": "^3.5.3",
+		"tsx": "^4.23.11",
+		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.26.1",
+		"vitest": "^3.0.8",
+		"wrangler": "^4.0.0"
+	},
+	"lint-staged": {
+		"src/**/*.{ts,js}": [
+			"eslint --max-warnings=100 --fix"
+		],
+		"*.{json,md,yml,yaml}": [
+			"prettier -w"
+		]
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		],
+		"rules": {
+			"type-enum": [
+				2,
+				"always",
+				[
+					"feat",
+					"fix",
+					"docs",
+					"style",
+					"refactor",
+					"perf",
+					"test",
+					"chore"
+				]
+			],
+			"subject-case": [
+				2,
+				"always",
+				"sentence-case"
+			]
+		}
+	}
+}

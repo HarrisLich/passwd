@@ -1,0 +1,5 @@
+-- Deprecated in favor of Drizzle schema + `npm run db:push`.
+-- Source of truth: src/infra/db/schema.ts
+--
+-- Tables: user, session, account, verification (Better Auth)
+--         vault_items (ciphertext envelopes only)

@@ -1,0 +1,23 @@
+{
+	"name": "passwd",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Passwd monorepo — zero-knowledge password manager",
+	"workspaces": [
+		"passwd-crypto",
+		"passwd-server",
+		"passwd-svelte",
+		"passwd-extension",
+		"passwd-desktop"
+	],
+	"scripts": {
+		"dev:server": "npm run dev -w passwd-server",
+		"dev:web": "npm run dev -w passwd-svelte -- --host 127.0.0.1 --port 5173",
+		"test:crypto": "npm run test -w passwd-crypto -- --run",
+		"typecheck": "npm run typecheck -w passwd-crypto && npm run typecheck -w passwd-server",
+		"db:push": "npm run db:push -w passwd-server"
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}

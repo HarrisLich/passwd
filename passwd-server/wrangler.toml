@@ -1,0 +1,10 @@
+name = "passwd-server"
+main = "src/index.ts"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Bind secrets via `wrangler secret put`:
+# TURSO_DATABASE_URL, TURSO_AUTH_TOKEN, SESSION_SECRET
+
+[vars]
+ENVIRONMENT = "development"

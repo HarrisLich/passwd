@@ -1,0 +1,12 @@
+[
+	{
+		"date": "2026-08-09",
+		"macrostructure": "Marquee Hero",
+		"theme": "Cobalt",
+		"tone": "modern-minimal",
+		"anchorHue": "cobalt ~256",
+		"nav": "N13 inline ⌘K-pill",
+		"footer": "Ft5 Statement",
+		"path": "src/routes/+page.svelte"
+	}
+]

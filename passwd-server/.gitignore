@@ -1,0 +1,10 @@
+node_modules
+dist
+.wrangler
+.dev.vars
+.env
+.data
+drizzle/meta
+coverage
+.DS_Store
+*.log

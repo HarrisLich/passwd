@@ -1,0 +1,25 @@
+{
+	"name": "passwd-extension",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"description": "Passwd browser extension (WXT) — autofill + secure messaging",
+	"scripts": {
+		"dev": "wxt",
+		"build": "wxt build",
+		"zip": "wxt zip",
+		"typecheck": "tsc --noEmit --pretty",
+		"test": "vitest",
+		"lint": "eslint .",
+		"prepare": "husky || true"
+	},
+	"devDependencies": {
+		"@types/chrome": "^0.0.304",
+		"typescript": "^5.8.2",
+		"vitest": "^3.0.8",
+		"wxt": "^0.19.29"
+	},
+	"dependencies": {
+		"zod": "^3.24.2"
+	}
+}

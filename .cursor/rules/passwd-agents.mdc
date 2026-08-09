@@ -1,0 +1,34 @@
+---
+description: Passwd monorepo agent instructions — package boundaries, skills, zero-knowledge invariants.
+alwaysApply: true
+---
+
+# Passwd — always-on agent context
+
+Read and follow root [`AGENTS.md`](../../AGENTS.md) for this monorepo.
+
+## Packages (do not collapse into one tree)
+
+| Need | Package |
+|------|---------|
+| Encrypt / KDF / Secret Key | `passwd-crypto` |
+| HTTP API, Turso, sessions | `passwd-server` |
+| Web UI / unlock / vault | `passwd-svelte` |
+| Autofill / content scripts | `passwd-extension` |
+| Native desktop shell | `passwd-desktop` |
+
+## Skills to load (in-repo under `.cursor/skills/`)
+
+1. `passwd-architecture` — always for cross-cutting work
+2. `passwd-zero-knowledge` — any auth/crypto/unlock/sync feature
+3. Domain skill (`passwd-crypto`, `passwd-sync`, `passwd-extension`) as needed
+4. `hallmark` — greenfield or redesign UI in `passwd-svelte`
+5. `architecture-blueprints` — when scaffolding modules/trees
+6. Svelte skills / MCP — when editing `.svelte` files
+
+## Non-negotiables
+
+- Never send master password, Secret Key, or `K_vault` to the server
+- Never decrypt vault items on the server
+- Prefer blueprint layering: routes thin → modules/services → repos/infra
+- Do not invent API fields — extend `passwd-server` contracts first

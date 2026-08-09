@@ -1,0 +1,13 @@
+{
+	"name": "passwd-desktop",
+	"version": "0.0.1",
+	"private": true,
+	"description": "Tauri desktop shell for Passwd (wraps passwd-svelte)",
+	"scripts": {
+		"dev": "echo 'Point Tauri at passwd-svelte (see README)' && exit 0",
+		"tauri": "tauri"
+	},
+	"devDependencies": {
+		"@tauri-apps/cli": "^2.3.1"
+	}
+}
