@@ -12,7 +12,7 @@ npm install --legacy-peer-deps
 npx wxt prepare -w passwd-extension
 ```
 
-The server needs to trust the extension's origin for session cookies to work (see "Server config" below) before unlock will succeed.
+The extension talks to the **deployed production `passwd-server`** by default (`lib/api/config.ts`'s `DEFAULT_API_BASE`) — no server setup needed to just use it. Building from a clean clone reproduces the exact same `chrome-extension://<id>` every time (`.env.local`'s `WXT_EXTENSION_DEV_KEY` is committed on purpose — see its own comment), and production's `EXTENSION_ORIGIN` already trusts that id, so a fresh build on any machine just works.
 
 ## Dev
 
@@ -22,18 +22,13 @@ npm run dev -w passwd-extension
 
 Load the unpacked build (`.output/chrome-mv3` while `wxt dev` is running) via `chrome://extensions` → Developer mode → Load unpacked.
 
-## Server config (local dev)
+## Pointing at a local passwd-server instead of production
 
-A `chrome-extension://<id>` origin is cross-site to `passwd-server`, so it needs an explicit allowlist entry and a `SameSite=None` cookie (see `passwd-server/src/infra/auth/better-auth.ts`):
+Open the extension's Options page and set the API base URL to `http://127.0.0.1:8787` (persisted in `chrome.storage.local`, overrides the production default). The local server then also needs to trust the extension's origin — a `chrome-extension://<id>` origin is cross-site to `passwd-server`, so it needs an explicit allowlist entry and a `SameSite=None` cookie (see `passwd-server/src/infra/auth/better-auth.ts`):
 
-1. Generate a stable dev extension key so the id doesn't change every reload, and set it before running `wxt dev`:
-   ```bash
-   export WXT_EXTENSION_DEV_KEY="<base64 RSA public key>"
-   ```
-2. Load the unpacked extension once, note the id shown in `chrome://extensions`.
-3. In `passwd-server/.env`, set `EXTENSION_ORIGIN=chrome-extension://<id>` and restart `npm run dev:server`.
+1. In `passwd-server/.env`, set `EXTENSION_ORIGIN=chrome-extension://jkhobgfeakjblkamfhebekmmcpffkond` (the id derived from the committed dev key — same one production already trusts) and restart `npm run dev:server`.
 
-Leave `EXTENSION_ORIGIN` unset in production — it only relaxes CORS/cookie behavior when explicitly configured.
+`EXTENSION_ORIGIN` is also set on the deployed Worker (`passwd-server/wrangler.toml`'s `[vars]`) for the same reason, to the same id.
 
 ## Layout
 

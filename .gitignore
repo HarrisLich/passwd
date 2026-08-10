@@ -3,6 +3,9 @@
 .env
 .env.*
 !.env.example
+# Not secret — public half of a pinned extension signing key, committed so every
+# machine building passwd-extension gets the same chrome-extension://<id>.
+!passwd-extension/.env.local
 .dev.vars
 
 node_modules

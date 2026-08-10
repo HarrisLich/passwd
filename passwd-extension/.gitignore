@@ -3,6 +3,10 @@ node_modules
 .wxt
 dist
 .env
-.env.local
 .DS_Store
 *.log
+# .env.local IS committed on purpose: it only holds the public half of the pinned dev
+# signing key (WXT_EXTENSION_DEV_KEY) so the extension gets the same chrome-extension://
+# id on every machine that builds this repo, matching passwd-server's EXTENSION_ORIGIN
+# without per-device reconfiguration. Not secret — the same value ends up in every
+# built manifest.json anyway.

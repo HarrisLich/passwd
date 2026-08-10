@@ -10,3 +10,6 @@ compatibility_flags = ["nodejs_compat"]
 ENVIRONMENT = "production"
 FRONTEND_ORIGIN = "https://passwd-web.harris-lichstein.workers.dev"
 BETTER_AUTH_URL = "https://passwd-server.harris-lichstein.workers.dev"
+# Matches passwd-extension's committed .env.local dev signing key — same id on every
+# machine that builds the extension, so this only ever needs setting once.
+EXTENSION_ORIGIN = "chrome-extension://jkhobgfeakjblkamfhebekmmcpffkond"

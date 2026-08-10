@@ -1,9 +1,21 @@
+import { existsSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'wxt';
 
-// Pin a stable dev extension id (chrome-extension://<id>) so the server's
-// EXTENSION_ORIGIN allowlist doesn't need updating on every reload. Generate your
-// own keypair locally and set WXT_EXTENSION_DEV_KEY — never commit a real key here.
-const devKey = process.env.WXT_EXTENSION_DEV_KEY;
+// wxt.config.ts is evaluated before WXT's own .env loading runs (confirmed empirically —
+// process.env.WXT_EXTENSION_DEV_KEY isn't populated here even though .env.local exists),
+// so read it ourselves rather than relying on that.
+function readEnvLocal(key: string): string | undefined {
+	if (!existsSync('.env.local')) return undefined;
+	const line = readFileSync('.env.local', 'utf8')
+		.split(/\r?\n/)
+		.find((l) => l.startsWith(`${key}=`));
+	return line?.slice(key.length + 1).trim();
+}
+
+// Pin a stable extension id (chrome-extension://<id>) so it matches passwd-server's
+// EXTENSION_ORIGIN allowlist on every machine, with no per-device reconfiguration.
+// .env.local is committed on purpose — see its own comment for why that's safe here.
+const devKey = process.env.WXT_EXTENSION_DEV_KEY || readEnvLocal('WXT_EXTENSION_DEV_KEY');
 
 export default defineConfig({
 	srcDir: '.',
