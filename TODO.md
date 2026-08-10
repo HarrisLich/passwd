@@ -19,11 +19,16 @@ Living list of improvements. Check items off as they ship; add new ones at the b
 - [ ] Tauri desktop shell (`passwd-desktop`)
 - [ ] WebAuthn / passkey as optional unlock factor
 - [ ] Conflict merge UI beyond last-write-wins
-- [ ] `wrangler login` + `wrangler deploy` (actual Worker deployment — DB persistence is done, see below)
+- [ ] Custom domain (currently on default *.workers.dev URLs)
+- [ ] CI/CD auto-deploy on push (currently manual `wrangler deploy`)
 - [ ] Account recovery / emergency kit export (Secret Key + account details)
 
 ## Done (recent)
 
+- [x] Deployed `passwd-server` + `passwd-svelte` (as `passwd-web`) to Cloudflare Workers —
+      cross-origin session cookies (SameSite=None/Secure) generalized from the extension's
+      fix, CORS allowlist wired to FRONTEND_ORIGIN, worked around a Rolldown/Vite SSR bug
+      (vitejs/vite#21969) that crashed Worker startup
 - [x] Persistent production DB (Turso Cloud) + local↔prod data sync (`npm run db:pull` /
       `db:push-data` in `passwd-server`, see its README) — verified schema + data match
       and round-trip correctly against the live prod DB
