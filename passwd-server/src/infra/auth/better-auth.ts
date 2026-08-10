@@ -41,10 +41,12 @@ export function createAuth(env: Env) {
 		advanced: {
 			defaultCookieAttributes: {
 				// A chrome-extension:// origin calling this API is cross-site, so
-				// SameSite=Lax would silently drop the cookie on fetch/XHR. Chrome
-				// trusts http://127.0.0.1 as a secure context, so Secure still works
+				// SameSite=Lax would silently drop the cookie on fetch/XHR — same problem
+				// in production, where passwd-svelte and passwd-server deploy as separate
+				// Workers on separate origins (no same-origin Vite proxy trick there).
+				// Chrome trusts http://127.0.0.1 as a secure context, so Secure still works
 				// without HTTPS in local dev once EXTENSION_ORIGIN is set.
-				sameSite: env.EXTENSION_ORIGIN ? 'none' : 'lax',
+				sameSite: env.EXTENSION_ORIGIN || env.ENVIRONMENT === 'production' ? 'none' : 'lax',
 				secure: env.ENVIRONMENT === 'production' || Boolean(env.EXTENSION_ORIGIN),
 				httpOnly: true
 			}

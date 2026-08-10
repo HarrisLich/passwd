@@ -9,6 +9,21 @@ const apiProxy = {
 };
 
 export default defineConfig({
+	// Works around https://github.com/vitejs/vite/issues/21969: Rolldown's SSR build
+	// defaults build.rolldownOptions.platform to 'node' even when ssr.target is
+	// 'webworker' (set by adapter-cloudflare), emitting createRequire(import.meta.url)
+	// for CJS interop — import.meta.url is undefined in Cloudflare's bundled Worker
+	// module scope, so that throws at startup ("Received 'undefined'", API code 10021).
+	// Forcing 'neutral' stops Rolldown from emitting the Node-only interop shim.
+	environments: {
+		ssr: {
+			build: {
+				rolldownOptions: {
+					platform: 'neutral'
+				}
+			}
+		}
+	},
 	plugins: [
 		tailwindcss(),
 		sveltekit({

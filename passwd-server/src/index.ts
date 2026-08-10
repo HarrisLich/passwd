@@ -26,8 +26,9 @@ app.use(
 				'http://localhost:8787',
 				'http://127.0.0.1:8787'
 			]);
-			const extensionOrigin = (c.env as Partial<AppEnv['Bindings']>).EXTENSION_ORIGIN;
-			if (extensionOrigin) allowed.add(extensionOrigin);
+			const bindings = c.env as Partial<AppEnv['Bindings']>;
+			if (bindings.EXTENSION_ORIGIN) allowed.add(bindings.EXTENSION_ORIGIN);
+			if (bindings.FRONTEND_ORIGIN) allowed.add(bindings.FRONTEND_ORIGIN);
 			if (!origin) return 'http://127.0.0.1:5173';
 			return allowed.has(origin) ? origin : null;
 		},

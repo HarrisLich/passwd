@@ -7,4 +7,6 @@ compatibility_flags = ["nodejs_compat"]
 # TURSO_DATABASE_URL, TURSO_AUTH_TOKEN, SESSION_SECRET
 
 [vars]
-ENVIRONMENT = "development"
+ENVIRONMENT = "production"
+FRONTEND_ORIGIN = "https://passwd-web.harris-lichstein.workers.dev"
+BETTER_AUTH_URL = "https://passwd-server.harris-lichstein.workers.dev"
