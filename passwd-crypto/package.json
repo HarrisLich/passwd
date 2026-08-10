@@ -22,7 +22,7 @@
 		"test:ci": "vitest run --coverage --passWithNoTests",
 		"lint": "eslint .",
 		"format": "prettier --write .",
-		"prepare": "husky || true"
+		"prepare": "node -e \"try{require('child_process').execSync('husky',{stdio:'ignore'})}catch(e){}\""
 	},
 	"dependencies": {
 		"@noble/ciphers": "^2.3.0",

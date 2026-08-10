@@ -5,6 +5,8 @@ export type Env = {
 	BETTER_AUTH_URL: string;
 	FRONTEND_ORIGIN: string;
 	ENVIRONMENT: string;
+	/** chrome-extension://<id> for passwd-extension dev — unset in production. */
+	EXTENSION_ORIGIN?: string;
 };
 
 export function envFromProcess(): Env {
@@ -19,6 +21,7 @@ export function envFromProcess(): Env {
 		SESSION_SECRET,
 		BETTER_AUTH_URL: process.env.BETTER_AUTH_URL ?? 'http://localhost:8787',
 		FRONTEND_ORIGIN: process.env.FRONTEND_ORIGIN ?? 'http://localhost:5173',
-		ENVIRONMENT: process.env.ENVIRONMENT ?? 'development'
+		ENVIRONMENT: process.env.ENVIRONMENT ?? 'development',
+		EXTENSION_ORIGIN: process.env.EXTENSION_ORIGIN || undefined
 	};
 }

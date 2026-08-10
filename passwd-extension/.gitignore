@@ -2,5 +2,7 @@ node_modules
 .output
 .wxt
 dist
+.env
+.env.local
 .DS_Store
 *.log

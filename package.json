@@ -14,7 +14,7 @@
 		"dev:server": "npm run dev -w passwd-server",
 		"dev:web": "npm run dev -w passwd-svelte -- --host 127.0.0.1 --port 5173",
 		"test:crypto": "npm run test -w passwd-crypto -- --run",
-		"typecheck": "npm run typecheck -w passwd-crypto && npm run typecheck -w passwd-server",
+		"typecheck": "npm run typecheck -w passwd-crypto && npm run typecheck -w passwd-server && npm run typecheck -w passwd-extension",
 		"db:push": "npm run db:push -w passwd-server"
 	},
 	"engines": {

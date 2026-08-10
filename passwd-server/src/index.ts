@@ -19,13 +19,15 @@ const app = new Hono<AppEnv>();
 app.use(
 	'*',
 	cors({
-		origin: (origin) => {
+		origin: (origin, c) => {
 			const allowed = new Set([
 				'http://localhost:5173',
 				'http://127.0.0.1:5173',
 				'http://localhost:8787',
 				'http://127.0.0.1:8787'
 			]);
+			const extensionOrigin = (c.env as Partial<AppEnv['Bindings']>).EXTENSION_ORIGIN;
+			if (extensionOrigin) allowed.add(extensionOrigin);
 			if (!origin) return 'http://127.0.0.1:5173';
 			return allowed.has(origin) ? origin : null;
 		},

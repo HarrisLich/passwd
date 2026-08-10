@@ -11,15 +11,18 @@
 		"typecheck": "tsc --noEmit --pretty",
 		"test": "vitest",
 		"lint": "eslint .",
-		"prepare": "husky || true"
+		"prepare": "node -e \"try{require('child_process').execSync('husky',{stdio:'ignore'})}catch(e){}\""
 	},
 	"devDependencies": {
 		"@types/chrome": "^0.0.304",
+		"jsdom": "^25.0.1",
 		"typescript": "^5.8.2",
 		"vitest": "^3.0.8",
 		"wxt": "^0.19.29"
 	},
 	"dependencies": {
+		"passwd-crypto": "*",
+		"tldts": "^6.1.86",
 		"zod": "^3.24.2"
 	}
 }

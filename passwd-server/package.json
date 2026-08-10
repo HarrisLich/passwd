@@ -14,9 +14,11 @@
 		"lint": "eslint .",
 		"format": "prettier --write .",
 		"db:push": "drizzle-kit push",
+		"db:pull": "tsx scripts/db-sync.ts pull",
+		"db:push-data": "tsx scripts/db-sync.ts push-data",
 		"db:migrate:sharing": "sqlite3 .data/passwd.db < scripts/migrate-sharing.sql",
 		"db:studio": "drizzle-kit studio",
-		"prepare": "husky || true"
+		"prepare": "node -e \"try{require('child_process').execSync('husky',{stdio:'ignore'})}catch(e){}\""
 	},
 	"dependencies": {
 		"@libsql/client": "^0.14.0",

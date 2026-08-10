@@ -13,15 +13,23 @@ Living list of improvements. Check items off as they ship; add new ones at the b
 
 - [ ] **Pending invites** for users who don’t have an account yet (email invite → placeholder → claim keypair on signup). Skipped for now; needed for non-technical staff handoffs.
 - [ ] Vault item types beyond login (secure notes, cards, etc.)
-- [ ] Browser extension autofill (`passwd-extension`) wired to shared crypto + session
+- [ ] Extension: group-shared vault support (currently user-only recipients)
+- [ ] Extension: path-restricted / "match anywhere" autofill rules (currently exact-host only)
+- [ ] Extension: memorable/diceware password generator mode, Chrome Web Store packaging
 - [ ] Tauri desktop shell (`passwd-desktop`)
 - [ ] WebAuthn / passkey as optional unlock factor
 - [ ] Conflict merge UI beyond last-write-wins
-- [ ] Turso Cloud + `wrangler` edge deploy path (swap off local `file:` DB)
+- [ ] `wrangler login` + `wrangler deploy` (actual Worker deployment — DB persistence is done, see below)
 - [ ] Account recovery / emergency kit export (Secret Key + account details)
 
 ## Done (recent)
 
+- [x] Persistent production DB (Turso Cloud) + local↔prod data sync (`npm run db:pull` /
+      `db:push-data` in `passwd-server`, see its README) — verified schema + data match
+      and round-trip correctly against the live prod DB
+- [x] Browser extension (`passwd-extension`): popup unlock, inline autofill suggestions,
+      password generator, save/update prompts — sign-in only, exact-host matching,
+      no group-shared vault support yet (see passwd-extension/README.md)
 - [x] Zero-knowledge signup / unlock (Argon2id dual-derive + Secret Key)
 - [x] Better Auth sessions + Turso/libsql persistence
 - [x] Encrypted vault item CRUD + sync
